@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Antigravity Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../public/global.css">
+  <style>
+    .admin-header {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      padding: var(--spacing-sm) 0;
+    }
+    
+    .stat-card {
+      background-color: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-md);
+      border-left: 4px solid var(--primary);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-top: 1px solid var(--color-gray-border);
+      border-right: 1px solid var(--color-gray-border);
+      border-bottom: 1px solid var(--color-gray-border);
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-black);
+      margin-top: var(--spacing-xs);
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--spacing-sm);
+    }
+    
+    .table th, .table td {
+      padding: var(--spacing-sm);
+      text-align: left;
+      border-bottom: 1px solid var(--color-gray-border);
+    }
+    
+    .table th {
+      background-color: var(--color-white-off);
+      font-weight: 600;
+      color: var(--color-black-light);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="container flex justify-between items-center flex-wrap gap-sm">
+      <div class="flex items-center gap-sm">
+        <h1 class="text-primary" style="margin:0; font-size: 1.5rem;">Antigravity Admin</h1>
+      </div>
+      <div class="flex gap-sm">
+        <a href="scanner.html" class="btn btn-primary" style="padding: 6px 16px;">QR Scanner</a>
+        <a href="../../../public/index.html" class="btn btn-outline" style="border-color: var(--color-white); color: var(--color-white); padding: 6px 16px;">Kembali</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container pt-md pb-lg">
+    <div class="flex justify-between items-center mb-md flex-wrap gap-sm">
+      <h2 style="margin: 0;">Analytics Dashboard</h2>
+      
+      <div class="flex gap-sm items-center">
+        <input type="date" id="startDate" class="input" style="width: auto; padding: 6px 12px; border-radius: var(--radius-md);">
+        <span class="text-muted">sd</span>
+        <input type="date" id="endDate" class="input" style="width: auto; padding: 6px 12px; border-radius: var(--radius-md);">
+        <button id="filterBtn" class="btn btn-primary" style="padding: 6px 16px; border-radius: var(--radius-md);">Filter</button>
+      </div>
+    </div>
+    
+    <div id="loadingState" class="text-center p-md text-muted" style="display: none;">Memuat data analitik...</div>
+    
+    <div id="dashboardContent">
+      <div class="grid grid-cols-3 gap-md mb-lg">
+        <div class="stat-card">
+          <div class="text-muted">Total Pendapatan</div>
+          <div class="stat-value text-primary" id="totalRevenue">Rp 0</div>
+        </div>
+        <div class="stat-card">
+          <div class="text-muted">Jumlah Pesanan</div>
+          <div class="stat-value" id="totalOrders">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="text-muted">Makanan Terlaris</div>
+          <div class="stat-value" id="topFood" style="font-size: 1.25rem; font-weight: 600; margin-top: 1rem;">-</div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3 class="mb-sm">Pesanan Terbaru</h3>
+        <div style="overflow-x: auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID Pesanan</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <!-- JS Populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="dashboardController.js"></script>
+</body>
+</html>

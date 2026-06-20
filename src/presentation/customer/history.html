@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Histori Pesanan - Antigravity Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../public/global.css">
+  <style>
+    .qr-container { text-align: center; margin-top: var(--spacing-md); }
+    .qr-container img { 
+      border: 4px solid var(--primary); 
+      border-radius: var(--radius-sm); 
+      padding: 8px;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container pt-md pb-md">
+    <div class="flex justify-between items-center mb-md">
+      <h2>Histori Pesanan (Demo)</h2>
+      <a href="katalog.html" class="btn btn-outline">Kembali ke Katalog</a>
+    </div>
+    
+    <div class="card" style="max-width: 500px; margin: 0 auto; text-align: center;">
+      <h3 style="font-family: monospace; font-size: 1.5rem;">ORD-12345-ABCD</h3>
+      <p class="text-primary" style="font-weight: 700; font-size: 1.25rem;">Status: PAID</p>
+      <div class="qr-container">
+        <p class="mb-sm text-muted">Tunjukkan QR Code ini ke Kasir / Admin Scanner</p>
+        <!-- Menggunakan qrserver API untuk men-generate QR -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=ORD-12345-ABCD" alt="QR Code">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

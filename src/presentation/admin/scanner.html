@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Scanner Admin - Antigravity Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../public/global.css">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <style>
+    .admin-header {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      padding: var(--spacing-sm) 0;
+    }
+    
+    #reader {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      border: 2px solid var(--color-gray-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background-color: var(--color-white);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-header">
+    <div class="container flex justify-between items-center">
+      <h1 class="text-primary" style="margin:0; font-size: 1.5rem;">Konfirmasi Pesanan</h1>
+      <a href="dashboard.html" class="btn btn-outline" style="border-color: white; color: white; padding: 6px 16px;">Kembali</a>
+    </div>
+  </header>
+
+  <main class="container pt-md pb-md">
+    <div style="text-align: center; margin-bottom: var(--spacing-md);">
+      <h2>Scan QR Code Pelanggan</h2>
+      <p class="text-muted">Arahkan kamera ke QR Code di halaman Histori Pesanan Pelanggan</p>
+    </div>
+    
+    <div id="reader"></div>
+  </main>
+
+  <script type="module" src="scannerController.js"></script>
+</body>
+</html>

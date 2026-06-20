@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Makanan - Antigravity Food</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../public/global.css">
+  
+  <!-- Midtrans Snap (Sandbox) -->
+  <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="YOUR_CLIENT_KEY"></script>
+  
+  <style>
+    /* Specific styles for catalog */
+    .header {
+      padding: var(--spacing-sm) 0;
+      border-bottom: 1px solid var(--color-gray-border);
+      background-color: var(--color-white);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    .search-bar {
+      max-width: 400px;
+    }
+    
+    .food-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-sm);
+      background-color: var(--color-white-off);
+    }
+    
+    /* Cart Drawer */
+    .cart-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 40;
+      display: none;
+    }
+    .cart-overlay.active { display: block; }
+    
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: -400px;
+      width: 400px;
+      height: 100vh;
+      background-color: var(--color-white);
+      z-index: 50;
+      transition: right var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -4px 0 15px rgba(0,0,0,0.05);
+    }
+    
+    .cart-drawer.active { right: 0; }
+    
+    @media (max-width: 480px) {
+      .cart-drawer { width: 100%; right: -100%; }
+    }
+    
+    .cart-header {
+      padding: var(--spacing-md);
+      border-bottom: 1px solid var(--color-gray-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--spacing-md);
+    }
+    
+    .cart-footer {
+      padding: var(--spacing-md);
+      border-top: 1px solid var(--color-gray-border);
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid var(--color-gray-border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container flex justify-between items-center flex-wrap gap-sm">
+      <a href="../../../public/index.html" style="text-decoration: none;">
+        <h1 class="text-primary" style="margin:0; font-size: 1.5rem;">Antigravity Food</h1>
+      </a>
+      
+      <div class="search-bar" style="flex: 1; min-width: 200px;">
+        <input type="text" id="searchInput" class="input" placeholder="Cari makanan...">
+      </div>
+      
+      <button id="cartBtn" class="btn btn-outline" style="border-radius: var(--radius-full);">
+        Keranjang (<span id="cartCount">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container pt-md pb-md">
+    <div class="flex justify-between items-center mb-md flex-wrap gap-sm">
+      <h2 style="margin: 0;">Menu Kami</h2>
+      <select id="categoryFilter" class="input" style="width: auto; border-radius: var(--radius-full);">
+        <option value="">Semua Kategori</option>
+        <option value="makanan">Makanan</option>
+        <option value="minuman">Minuman</option>
+        <option value="snack">Snack</option>
+      </select>
+    </div>
+    
+    <!-- Loading State -->
+    <div id="loadingState" class="p-lg" style="text-align: center;">
+      <p class="text-muted">Memuat menu...</p>
+    </div>
+    
+    <!-- Food Grid -->
+    <div id="foodGrid" class="grid grid-cols-4 gap-md" style="display: none;">
+      <!-- Populated via JS -->
+    </div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+  <div id="cartDrawer" class="cart-drawer">
+    <div class="cart-header">
+      <h2 style="margin: 0; font-size: 1.25rem;">Keranjang Anda</h2>
+      <button id="closeCartBtn" class="btn btn-outline" style="padding: 4px 12px; border-radius: var(--radius-full);">&times;</button>
+    </div>
+    <div id="cartItems" class="cart-items">
+      <!-- Cart items populated via JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="flex justify-between items-center mb-sm">
+        <span style="font-weight: 500; color: var(--color-black-light);">Total Pembayaran</span>
+        <span id="cartTotal" class="text-primary" style="font-weight: 700; font-size: 1.5rem;">Rp 0</span>
+      </div>
+      <!-- Nanti di Fase 5 tombol bayar dipanggil -->
+      <button id="checkoutBtn" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-full); padding: var(--spacing-sm);">Lanjut Pembayaran</button>
+    </div>
+  </div>
+
+  <script type="module" src="katalogController.js"></script>
+</body>
+</html>
